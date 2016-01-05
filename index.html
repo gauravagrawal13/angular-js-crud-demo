@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app>
+	<head>
+		<title>PHP MySQL API Consumed with AngularJS</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<!-- Latest compiled JavaScript -->
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="js/get-data.js"></script>
+	</head>
+
+	<body class="container">
+
+		<div ng-controller="GetUsers">
+			<div class='well'>
+			<h2>AngularJS + PHP + mySQL</h2>
+			<h4>Simple CRUD operations to show use of Angularjs and PHP</h4>
+			</div>
+			<h4>{{users.length}} Records Found.</h5>
+			
+			<input type="text" ng-model="searchString.id" placeholder="Filter By Id" />
+			<input type="text" ng-model="searchString.name" placeholder="Filter By Name" />
+			<input type="text" ng-model="searchString.city" placeholder="Filter By City" />
+
+			<div style="margin-top:20px;" class="alert alert-{{alertType}}" ng-bind="responseMessage" ng-show="responseMessage">
+				
+			</div>
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>City</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-hide="deleted" id="{{user.id}}" ng-repeat="user in users | filter:searchString ">
+						<td class="col-sm-3">{{user.id}}</td>
+						<td class="col-sm-3" ng-hide="editorEnabled">{{user.name}}</td>
+						<td class="col-sm-3" ng-show="editorEnabled">
+						<input ng-model="user.name">
+						</td>
+						<td class="col-sm-3" ng-hide="editorEnabled">{{user.city}}</td>
+						<td class="col-sm-3" ng-show="editorEnabled">
+						<input ng-model="user.city">
+						</td>
+						<td><a class="btn btn-xs btn-danger" ng-click="remove(user.id);deleted=!deleted">Delete</a>&nbsp;<a class="btn btn-xs btn-info" ng-hide="editorEnabled" ng-click="editorEnabled=!editorEnabled">Edit</a>
+							<a class="btn btn-xs btn-success" href="#" ng-show="editorEnabled" ng-click="update(user.id,user.name,user.city);editorEnabled=!editorEnabled">Save</a>
+							<a class="btn btn-xs btn-warning" href="#" ng-show="editorEnabled" ng-click="editorEnabled=!editorEnabled">Cancel</a>
+							</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+
+		<a class="btn btn-primary" href="insert.html">Add Record</a>
+	</body>
