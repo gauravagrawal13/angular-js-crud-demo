@@ -1,6 +1,6 @@
 function GetUsers($scope, $http) {
     // this is where the JSON from api.php is consumed
-    $http.get('http://localhost/angular-demo/action/get-data.php').
+    $http.get('http://'+window.location.hostname+'/angular-demo/action/get-data.php').
         success(function(data) {
             // here the data from the get-data is assigned to a variable named users
             $scope.users = data;
@@ -12,7 +12,7 @@ function GetUsers($scope, $http) {
  
             var request = $http({
                 method: "post",
-                url: "http://localhost/angular-demo/action/remove.php",
+                url: 'http://'+window.location.hostname+'/angular-demo/action/remove.php',
                 data: {
                     id: $id
                 },
@@ -36,7 +36,7 @@ function GetUsers($scope, $http) {
  
             var request = $http({
                 method: "post",
-                url: "http://localhost/angular-demo/action/update.php",
+                url: 'http://'+window.location.hostname+'/angular-demo/action/update.php',
                 data: {
                     id: $id,
                     name: $name,
