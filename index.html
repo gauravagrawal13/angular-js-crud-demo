@@ -4,9 +4,15 @@
 		<title>PHP MySQL API Consumed with AngularJS</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 		<!-- Latest compiled JavaScript -->
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script src="js/get-data.js"></script>
+		<noscript>
+  			<div class="alert alert-danger">
+    		This site requires JavaScript. I will only be visible if you have it disabled.
+  			</div>
+		</noscript>
 	</head>
 
 	<body class="container">
@@ -18,8 +24,11 @@
 			</div>
 			<h4>{{users.length}} Records Found.</h5>
 			
+			<span class="glyphicon glyphicon-filter"></span>
 			<input type="text" ng-model="searchString.id" placeholder="Filter By Id" />
+			<span class="glyphicon glyphicon-filter"></span>
 			<input type="text" ng-model="searchString.name" placeholder="Filter By Name" />
+			<span class="glyphicon glyphicon-filter"></span>
 			<input type="text" ng-model="searchString.city" placeholder="Filter By City" />
 
 			<div style="margin-top:20px;" class="alert alert-{{alertType}}" ng-bind="responseMessage" ng-show="responseMessage">
@@ -38,7 +47,7 @@
 				<tbody>
 					<tr ng-hide="deleted" id="{{user.id}}" ng-repeat="user in users | filter:searchString ">
 						<td class="col-sm-3">{{user.id}}</td>
-						<td class="col-sm-3" ng-hide="editorEnabled">{{user.name}}</td>
+						<td class="col-sm-3" ng-hide="editorEnabled" >{{user.name}}</td>
 						<td class="col-sm-3" ng-show="editorEnabled">
 						<input ng-model="user.name">
 						</td>
@@ -46,9 +55,9 @@
 						<td class="col-sm-3" ng-show="editorEnabled">
 						<input ng-model="user.city">
 						</td>
-						<td><a class="btn btn-xs btn-danger" ng-click="remove(user.id);deleted=!deleted">Delete</a>&nbsp;<a class="btn btn-xs btn-info" ng-hide="editorEnabled" ng-click="editorEnabled=!editorEnabled">Edit</a>
-							<a class="btn btn-xs btn-success" href="#" ng-show="editorEnabled" ng-click="update(user.id,user.name,user.city);editorEnabled=!editorEnabled">Save</a>
-							<a class="btn btn-xs btn-warning" href="#" ng-show="editorEnabled" ng-click="editorEnabled=!editorEnabled">Cancel</a>
+						<td><a class="btn btn-xs btn-danger" ng-click="remove(user.id);deleted=!deleted"><span class="glyphicon glyphicon-remove">&nbsp;</span>Delete</a>&nbsp;<a class="btn btn-xs btn-info" ng-hide="editorEnabled" ng-click="editorEnabled=!editorEnabled"><span class="glyphicon glyphicon-pencil">&nbsp;</span>Edit</a>
+							<a class="btn btn-xs btn-success" href="#" ng-show="editorEnabled" ng-click="update(user.id,user.name,user.city);editorEnabled=!editorEnabled"><span class="glyphicon glyphicon-ok">&nbsp;</span>Save</a>
+							<a class="btn btn-xs btn-warning" href="#" ng-show="editorEnabled" ng-click="editorEnabled=!editorEnabled"><span class="glyphicon glyphicon-repeat">&nbsp;</span>Cancel</a>
 							</td>
 					</tr>
 				</tbody>
@@ -56,5 +65,5 @@
 			
 		</div>
 
-		<a class="btn btn-primary" href="insert.html">Add Record</a>
+		<a class="btn btn-primary" href="insert.html"><span class="glyphicon glyphicon-plus">&nbsp;</span>Add Record</a>
 	</body>
