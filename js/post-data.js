@@ -7,7 +7,7 @@ app.controller('loginCtrl', function ($scope, $http) {
  
             var request = $http({
                 method: "post",
-                url: "http://localhost/angular-demo/action/insert.php",
+                url: 'http://'+window.location.hostname+'/angular-demo/action/insert.php',
                 data: {
                     name: $scope.name,
                     city: $scope.city
