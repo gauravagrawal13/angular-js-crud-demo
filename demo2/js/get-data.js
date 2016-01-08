@@ -1,11 +1,6 @@
 var app = angular.module("myApp", ['ngSanitize', 'ngCsv']);
 app.controller("GetUsers", function ($scope, $http) {
 	
-	$scope.color = "transparent";
-	$scope.pick = function($color){
-		
-		$scope.color = $color;
-	}
     // this is where the JSON from api.php is consumed
     $http.get('http://'+window.location.hostname+'/angular-demo/action/get-data.php').
         success(function(data) {
