@@ -1,5 +1,5 @@
 # angular-js-crud-demo
-CRUD operation with Angular.js, PHP and MySQL.
+Simple CRUD operation with Angular.js, PHP and MySQL.
 
 Instructions:
 
