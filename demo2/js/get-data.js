@@ -1,5 +1,11 @@
 var app = angular.module("myApp", ['ngSanitize', 'ngCsv']);
 app.controller("GetUsers", function ($scope, $http) {
+	
+	$scope.color = "transparent";
+	$scope.pick = function($color){
+		
+		$scope.color = $color;
+	}
     // this is where the JSON from api.php is consumed
     $http.get('http://'+window.location.hostname+'/angular-demo/action/get-data.php').
         success(function(data) {
@@ -23,6 +29,11 @@ app.controller("GetUsers", function ($scope, $http) {
     // when the response is available
     $scope.responseMessage = "Inserted Successfuly !";
     $scope.alertType = "success";
+     $http.get('http://'+window.location.hostname+'/angular-demo/action/get-data.php').
+        success(function(data) {
+            // here the data from the get-data is assigned to a variable named users
+            $scope.users = data;
+        });
   }, function errorCallback(response) {
     // called asynchronously if an error occurs
     // or server returns response with an error status.
@@ -48,6 +59,11 @@ app.controller("GetUsers", function ($scope, $http) {
     
     $scope.responseMessage = "Deleted Successfuly!";
     $scope.alertType = "danger";
+    $http.get('http://'+window.location.hostname+'/angular-demo/action/get-data.php').
+        success(function(data) {
+            // here the data from the get-data is assigned to a variable named users
+            $scope.users = data;
+        });
     
   }, function errorCallback(response) {
     // called asynchronously if an error occurs
@@ -75,6 +91,11 @@ app.controller("GetUsers", function ($scope, $http) {
     
     $scope.responseMessage = "Updated Successfuly!";
     $scope.alertType = "success";
+    $http.get('http://'+window.location.hostname+'/angular-demo/action/get-data.php').
+        success(function(data) {
+            // here the data from the get-data is assigned to a variable named users
+            $scope.users = data;
+        });
     
   }, function errorCallback(response) {
     // called asynchronously if an error occurs
