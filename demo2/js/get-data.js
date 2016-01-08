@@ -86,12 +86,7 @@ app.controller("GetUsers", function ($scope, $http) {
     
     $scope.responseMessage = "Updated Successfuly!";
     $scope.alertType = "success";
-    $http.get('http://'+window.location.hostname+'/angular-demo/action/get-data.php').
-        success(function(data) {
-            // here the data from the get-data is assigned to a variable named users
-            $scope.users = data;
-        });
-    
+   
   }, function errorCallback(response) {
     // called asynchronously if an error occurs
     // or server returns response with an error status.
