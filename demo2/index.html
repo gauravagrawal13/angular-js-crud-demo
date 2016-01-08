@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Cache-control" content="public">
+    <title>PHP MySQL API Consumed with AngularJS</title>
+    
+    <script src="js/angular.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+     <script src="js/angular-sanitize.js"></script>
+    <script src="js/ng-csv.min.js"></script>
+    <script src="js/get-data.js"></script>
+    
+    <noscript>
+        <div class="alert alert-danger">
+            This site requires JavaScript. I will only be visible if you have it disabled.
+        </div>
+    </noscript>
+</head>
+
+<body class="container" ng-app="myApp">
+
+    <div ng-controller="GetUsers">
+        <div class='well'>
+            <h2>AngularJS + PHP + mySQL</h2>
+            <h4>Simple CRUD operations to show use of Angularjs and PHP</h4>
+        </div>
+        <h4>{{users.length}} Records Found.</h5> <span class="glyphicon glyphicon-filter"></span>
+			<input type="text" ng-model="searchString.id" placeholder="Filter By Id" />
+			<span class="glyphicon glyphicon-filter"></span>
+			<input type="text" ng-model="searchString.name" placeholder="Filter By Name" />
+			<span class="glyphicon glyphicon-filter"></span>
+			<input type="text" ng-model="searchString.city" placeholder="Filter By City" />
+			<div style="margin-top:20px;" class="alert alert-{{alertType}}" ng-bind="responseMessage" ng-show="responseMessage">
+
+			</div>
+			<table ng-table="usersTable" class="table table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>City</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-hide="deleted" id="{{user.id}}" ng-repeat="user in users | filter:searchString ">
+						<td class="col-sm-3">{{user.id}}</td>
+						<td class="col-sm-3" ng-hide="editorEnabled" >{{user.name}}</td>
+						<td class="col-sm-3" ng-show="editorEnabled">
+						<input ng-model="user.name">
+						</td>
+						<td class="col-sm-3" ng-hide="editorEnabled">{{user.city}}</td>
+						<td class="col-sm-3" ng-show="editorEnabled">
+						<input ng-model="user.city">
+						</td>
+						<td><a class="btn btn-xs btn-danger" ng-click="remove(user.id);deleted=!deleted"><span class="glyphicon glyphicon-remove">&nbsp;</span>Delete</a>&nbsp;<a class="btn btn-xs btn-info" ng-hide="editorEnabled" ng-click="editorEnabled=!editorEnabled"><span class="glyphicon glyphicon-pencil">&nbsp;</span>Edit</a><a class="btn btn-xs btn-success" href="#" ng-show="editorEnabled" ng-click="update(user.id,user.name,user.city);editorEnabled=!editorEnabled"><span class="glyphicon glyphicon-ok">&nbsp;</span>Save</a>&nbsp;<a class="btn btn-xs btn-warning" href="#" ng-show="editorEnabled" ng-click="editorEnabled=!editorEnabled"><span class="glyphicon glyphicon-repeat">&nbsp;</span>Cancel</a></td>
+					</tr>
+				</tbody>
+			</table><!--Modal Form to Insert Data--><!-- Trigger the modal with a button -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+				<span class="glyphicon glyphicon-plus">&nbsp;</span>Add Record
+			</button><!-- Modal -->
+			<div id="myModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								&times;
+							</button>
+							<h4 class="modal-title">Add New Record</h4>
+    </div>
+    <div class="modal-body">
+        <form name="insertForm" class="myForm" required>
+
+            <input class="form-control" type="text" ng-model="name" placeholder="Enter Your Name" required>
+            <br>
+
+            <input class="form-control" type="text" ng-model="city" placeholder="Enter Your City" required>
+            <br>
+
+            <button class="btn btn-success" ng-click="insert()" ng-disabled="insertForm.$invalid">
+                Submit
+            </button>
+
+            <a class="btn btn-info" href="index.html"><span class="glyphicon glyphicon-eye-open">&nbsp;</span>View Records</a>
+            <br>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close
+        </button>
+    </div>
+    </div>
+    </div>
+    </div>
+    <!--End-->
+    <button class="btn btn-warning btn-xs" type="button"  ng-csv="users" filename="test.csv">Export CSV</button>
+    </div>
+
+    <!-- <a class="btn btn-primary" href="insert.html"><span class="glyphicon glyphicon-plus">&nbsp;</span>Add Record</a> -->
+</body>
