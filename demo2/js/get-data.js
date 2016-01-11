@@ -1,5 +1,18 @@
 var app = angular.module("myApp", ['ngSanitize', 'ngCsv']);
 app.controller("GetUsers", function ($scope, $http) {
+
+//Reset Submit Form
+	$scope.resetForm = function(){
+		$scope.name = '';
+		$scope.city = '';
+	}
+	
+//Reset Filters
+	$scope.resetFilter = function(){
+		$scope.searchString.id = '';
+		$scope.searchString.name = '';
+		$scope.searchString.city = '';
+	}
 	
     // this is where the JSON from api.php is consumed
     $http.get('http://'+window.location.hostname+'/angular-demo/action/get-data.php').
