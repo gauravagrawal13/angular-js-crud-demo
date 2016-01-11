@@ -37,6 +37,7 @@ app.controller("GetUsers", function ($scope, $http) {
     // when the response is available
     $scope.responseMessage = "Inserted Successfuly !";
     $scope.alertType = "success";
+     $scope.resetForm();
      $http.get('http://'+window.location.hostname+'/angular-demo/action/get-data.php').
         success(function(data) {
             // here the data from the get-data is assigned to a variable named users
