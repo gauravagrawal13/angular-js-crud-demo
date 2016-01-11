@@ -14,12 +14,14 @@ app.controller("GetUsers", function ($scope, $http) {
 		$scope.searchString.city = '';
 	}
 	
-    // this is where the JSON from api.php is consumed
+   $scope.get = function() {
+	   // this is where the JSON from api.php is consumed
     $http.get('http://'+window.location.hostname+'/angular-demo/action/get-data.php').
         success(function(data) {
             // here the data from the get-data is assigned to a variable named users
             $scope.users = data;
         });
+	}
         
     //Post request to Insert record into the database.
     $scope.insert = function () {
@@ -37,12 +39,8 @@ app.controller("GetUsers", function ($scope, $http) {
     // when the response is available
     $scope.responseMessage = "Inserted Successfuly !";
     $scope.alertType = "success";
-     $scope.resetForm();
-     $http.get('http://'+window.location.hostname+'/angular-demo/action/get-data.php').
-        success(function(data) {
-            // here the data from the get-data is assigned to a variable named users
-            $scope.users = data;
-        });
+    $scope.resetForm();
+    $scope.get();
   }, function errorCallback(response) {
     // called asynchronously if an error occurs
     // or server returns response with an error status.
@@ -68,11 +66,7 @@ app.controller("GetUsers", function ($scope, $http) {
     
     $scope.responseMessage = "Deleted Successfuly!";
     $scope.alertType = "danger";
-    $http.get('http://'+window.location.hostname+'/angular-demo/action/get-data.php').
-        success(function(data) {
-            // here the data from the get-data is assigned to a variable named users
-            $scope.users = data;
-        });
+    $scope.get();
     
   }, function errorCallback(response) {
     // called asynchronously if an error occurs
